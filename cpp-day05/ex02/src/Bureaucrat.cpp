@@ -27,11 +27,11 @@ std::string Bureaucrat::getName()
     return _name;
 }
 
- int Bureaucrat::getGrade() const
+int Bureaucrat::getGrade() const
 {
     return _echelon;
 }
- 
+
 void Bureaucrat::goHiger()
 {
     if (_echelon == 1)
@@ -50,6 +50,19 @@ void Bureaucrat::goLower()
     _echelon++;
 }
 
+void Bureaucrat::executeForm(Form const &form)
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << _name << " executed " << form.getName() << std::endl;
+    }
+    catch (...)
+    {
+        std::cout << _name << " make shit whit " << form.getName() << std::endl;
+    }
+}
+
 void Bureaucrat::signForm(Form &form)
 {
     std::cout << _name;
@@ -60,7 +73,7 @@ void Bureaucrat::signForm(Form &form)
         else
         {
             form.beSigned(*this);
-            std::cout << " signed " << form.getName()<< std::endl;
+            std::cout << " signed " << form.getName() << std::endl;
         }
     }
     catch (Form::GradeTooLowException &e)

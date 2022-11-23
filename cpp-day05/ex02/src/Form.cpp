@@ -28,7 +28,7 @@ Form::~Form()
 {
 }
 
-std::string Form::getName()
+std::string Form::getName() const
 {
     return _name;
 }
@@ -62,7 +62,7 @@ void Form::beSigned(Bureaucrat &b)
 
 void Form::execute(const Bureaucrat& executor) const
 {
-    	if (!getIsSigned())
+    if (!getIsSigned())
 		throw Form::notSignedException();
 	if (executor.getGrade() > this->getRungExec())
 		throw Form::GradeTooLowException();
@@ -77,6 +77,14 @@ std::string Form::GradeTooHighException::what()
 std::string Form::GradeTooLowException::what()
 {
     return "grade is to low";
+}
+std::string Form::alreadySignedException::what()
+{
+    return "already signed";
+}
+std::string Form::notSignedException::what()
+{
+    return "not signed";
 }
 
 std::ostream &operator<<(std::ostream &o, Form &forms)

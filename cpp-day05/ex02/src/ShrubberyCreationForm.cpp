@@ -1,6 +1,6 @@
 #include "ShrubberyCreationForm.h"
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name): Form(name, 145, 137) 
+ShrubberyCreationForm::ShrubberyCreationForm(std::string name, std::string target): Form(name, 145, 137) 
 {
 
 }

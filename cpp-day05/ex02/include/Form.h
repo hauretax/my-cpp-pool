@@ -39,7 +39,7 @@ public:
     };
 
     // accesseurs
-    std::string getName();
+    std::string getName() const;
     std::string getTarget() const;
     int getRungSign();
      int getRungExec() const;

@@ -7,11 +7,11 @@
 class PresidentialPardonForm : public Form
 {
 public:
-    PresidentialPardonForm(std::string name);
+    PresidentialPardonForm(std::string name, std::string target);
     ~PresidentialPardonForm();
     PresidentialPardonForm(PresidentialPardonForm &cpy);
     PresidentialPardonForm &operator=(const PresidentialPardonForm &assign);
-    void action(const Bureaucrat &executor) const;
+    virtual void execute(Bureaucrat const &executor) const;
 
 private:
 };
