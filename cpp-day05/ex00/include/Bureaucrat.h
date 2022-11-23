@@ -6,15 +6,22 @@
 #include <iostream>
 #include <string>
 
-class Bureaucrat: public std::exception
+class Bureaucrat
 {
 public:
   Bureaucrat(std::string _name, int _echelon);
   Bureaucrat(Bureaucrat &cpy);
   virtual ~Bureaucrat();
   Bureaucrat &operator=(const Bureaucrat &assign);
-
-  virtual const char *what() const throw();
+  
+  class test : public std::exception {
+    public:
+      std::string  what();
+  };
+    class test : public std::exception {
+    public:
+      std::string  what();
+  };
 
 protected:
   const std::string _name;
