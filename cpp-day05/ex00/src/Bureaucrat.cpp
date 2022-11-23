@@ -2,24 +2,15 @@
 
 Bureaucrat::Bureaucrat(std::string name, int echelon) : _name(name)
 {
-    // if (_echelon > 150)
-    // {
-    //     throw std::exception();
-    // }
-    // _echelon = echelon;
-
-
-
-    try
+    if (echelon > 150)
     {
-        std::cout << "visiblement ca foncitonne ";
-        throw Bureaucrat::test();
+        throw Bureaucrat::GradeTooLowException();
     }
-    catch (Bureaucrat::test & e)
+    if (echelon < 1)
     {
-        std::cout << "AAAAAHHH C E PT ";
-        std::cout << e.what() << std::endl;
+        throw Bureaucrat::GradeTooHighException();
     }
+    _echelon = echelon;
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat &cpy) : _name(cpy._name), _echelon(cpy._echelon)
@@ -30,12 +21,45 @@ Bureaucrat::~Bureaucrat()
 {
 }
 
+std::string Bureaucrat::getName()
+{
+    return _name;
+}
+
+int Bureaucrat::getGrade()
+{
+    return _echelon;
+}
+
+void Bureaucrat::goHiger()
+{
+    if (_echelon == 1)
+    {
+        throw Bureaucrat::GradeTooHighException();
+    }
+    _echelon--;
+}
+
+void Bureaucrat::goLower()
+{
+    if (_echelon == 150)
+    {
+        throw Bureaucrat::GradeTooLowException();
+    }
+    _echelon++;
+}
+
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &assignp)
 {
     return *this;
 }
 
-std::string Bureaucrat::test::what()
+std::string Bureaucrat::GradeTooHighException::what()
 {
-    return "YOOOOOOOOOOOOOOOOOOO";
+    return "sory u can t go higer";
+}
+
+std::string Bureaucrat::GradeTooLowException::what()
+{
+    return "sory u can t go lower";
 }

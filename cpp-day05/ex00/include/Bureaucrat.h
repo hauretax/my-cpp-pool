@@ -13,12 +13,17 @@ public:
   Bureaucrat(Bureaucrat &cpy);
   virtual ~Bureaucrat();
   Bureaucrat &operator=(const Bureaucrat &assign);
-  
-  class test : public std::exception {
+
+  std::string getName();
+  int getGrade();
+  void goHiger();
+  void goLower();
+
+  class GradeTooHighException : public std::exception {
     public:
       std::string  what();
   };
-    class test : public std::exception {
+    class GradeTooLowException : public std::exception {
     public:
       std::string  what();
   };
