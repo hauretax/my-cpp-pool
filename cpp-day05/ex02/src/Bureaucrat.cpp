@@ -1,4 +1,5 @@
 #include "Bureaucrat.h"
+#include "Form.h"
 
 Bureaucrat::Bureaucrat(std::string name, int echelon) : _name(name)
 {
@@ -26,11 +27,11 @@ std::string Bureaucrat::getName()
     return _name;
 }
 
-int Bureaucrat::getGrade()
+ int Bureaucrat::getGrade() const
 {
     return _echelon;
 }
-
+ 
 void Bureaucrat::goHiger()
 {
     if (_echelon == 1)
@@ -49,23 +50,43 @@ void Bureaucrat::goLower()
     _echelon++;
 }
 
+void Bureaucrat::signForm(Form &form)
+{
+    std::cout << _name;
+    try
+    {
+        if (form.getIsSigned())
+            std::cout << " couldn’t sign" << form.getName() << "because somoby already signe it " << std::endl;
+        else
+        {
+            form.beSigned(*this);
+            std::cout << " signed " << form.getName()<< std::endl;
+        }
+    }
+    catch (Form::GradeTooLowException &e)
+    {
+        std::cout << " couldn’t sign" << form.getName() << " because ";
+        std::cout << e.what() << std::endl;
+    }
+}
+
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &assignp)
 {
     return *this;
 }
 
-std::ostream &operator<<(std::ostream &o,  Bureaucrat &gens)
-{
-    o << gens.getName() << ", bureaucrat grade " << gens.getGrade();
-    return o;
-}
-
 std::string Bureaucrat::GradeTooHighException::what()
 {
-    return "sory u can t go higer";
+    return " u can t go higer";
 }
 
 std::string Bureaucrat::GradeTooLowException::what()
 {
-    return "sory u can t go lower";
+    return " u can t go lower";
+}
+
+std::ostream &operator<<(std::ostream &o, Bureaucrat &gens)
+{
+    o << gens.getName() << ", bureaucrat grade " << gens.getGrade();
+    return o;
 }

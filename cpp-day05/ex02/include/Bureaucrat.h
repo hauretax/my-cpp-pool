@@ -7,6 +7,9 @@
 #include <string>
 #include <ostream>
 
+class Bureaucrat;
+#include "Form.h"
+
 class Bureaucrat
 {
 public:
@@ -16,9 +19,10 @@ public:
   Bureaucrat &operator=(const Bureaucrat &assign);
 
   std::string getName();
-  int getGrade();
+  int getGrade()const;
   void goHiger();
   void goLower();
+  void signForm(Form& form);
 
   class GradeTooHighException : public std::exception
   {
